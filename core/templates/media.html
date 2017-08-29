@@ -3,9 +3,54 @@
 {% block title %}Media{% endblock %}
 
 {% block content %}
-    <div>
-        <div>{{ media.taken_at }}</div>
-        <div><img src="{{ media.image_versions2.candidates[0].url }}"></div>
-        <div>{{ media.caption.text }}</div>
+    <div class="ui container">
+        <div class="ui two column stackable grid">
+            <div class="sixteen wide tablet ten wide computer column">
+                <div class="ui text-centered fluid image">
+                    {% if media.media_type == 2 %}
+                        <video src="{{ media.image_versions2.candidates[0].url }}" controls></video>
+                    {% else %}
+                        <img src="{{ media.image_versions2.candidates[0].url }}"
+                        alt="">
+                    {% endif %}
+                </div>
+                <div class="ui center aligned basic display computer segment">
+                    <!-- Download photo -->
+                    <div>
+                        {% if media.media_type == 2 %}
+                            <a target="_blank" href="{{ media.image_versions2.candidates[1].url }}" class="foto-infofotolink__btn-download" download><i class="fa fa-download" aria-hidden="true"></i> Скачать видео</a>
+                        {% else %}
+                            <a target="_blank" href="{{ media.image_versions2.candidates[1].url }}" class="foto-infofotolink__btn-download" download><i class="fa fa-download" aria-hidden="true"></i> Скачать фото</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            <div class="sixteen wide tablet six wide computer column">
+                <!-- Meta info -->
+                <img class="ui middle aligned right spaced tiny circular image" src="{{ media.user.profile_pic_url }}">
+                <div style="display:inline-block;vertical-align:middle;">
+                    <div><a href="/user/{{ media.user.username }}">{{ media.user.username }}</a></div>
+                    <div class="ui hidden fitted divider"></div>
+                    <!-- Date -->
+                    <div>
+                    <small class="has_created_time" data-created-time="{{ media.taken_at }}"></small>
+                    </div>
+                </div>
+                <div class="ui hidden clearing divider"></div>
+                <!-- Caption -->
+                <div class="break-word">
+                    <p>{{ media.caption.text|e }}</p>
+                </div>
+                <div class="ui hidden divider"></div>
+                <!-- Likes block -->
+                <div class="ui basic segment likes">
+                    <div class="ui small dividing header">{{ media.like_count }} нравится</div>
+                </div>
+                <!-- Comments block -->
+                <div class="ui basic segment comments display mobile">
+                    <div class="ui small dividing header">{{ media.comment_count }} комментариев</div>
+                </div>
+            </div>
+        </div>
     </div>
 {% endblock %}
