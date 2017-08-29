@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block title %}Media{% endblock %}
+
+{% block content %}
+    <div>
+        <div>{{ media.taken_at }}</div>
+        <div><img src="{{ media.image_versions2.candidates[0].url }}"></div>
+        <div>{{ media.caption.text }}</div>
+    </div>
+{% endblock %}

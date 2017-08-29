@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block title %}Search{% endblock %}
+
+{% block content %}
+    {% if ( users|length > 0 ) or ( tags|length > 0 ) %}
+        <div class="ui two columns grid">
+            <div class="column">
+                <div class="ui divided items">
+                    {% for user in users %}
+                        <div class="item">
+                            <a class="ui tiny image" href="/user/{{ user.username|e }}">
+                                <img src="{{ user.profile_pic_url }}">
+                            </a>
+                            <div class="content">
+                                <a class="header" href="/user/{{ user.username|e }}">
+                                    {{ user.username|e }}
+                                </a>
+                                <div class="description">
+                                    {{ user.full_name|e }}
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="column">
+                <div class="ui divided items">
+                    {% for tag in tags %}
+                        <div class="item">
+                            <a class="ui tiny image" href="/tag/{{ tag.name|e }}">
+                                <i class="hashtag icon"></i>
+                            </a>
+                            <div class="content">
+                                <a class="header" href="/tag/{{ tag.name|e }}">
+                                    {{ tag.name|e }}
+                                </a>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    {% else %}
+        <div class="ui center aligned segment">
+            {% if q %}
+                <div class="ui yellow message">
+                    <div class="header">Whoops! Nothing is found.</div>
+                    <p>Use the form below, Luke!</p>
+                </div>
+            {% endif %}
+            <div class="ui search">
+                <form id="intro__search" action="/search" method="GET">
+                    <div class="ui icon input">
+                        <input type="text" name="q" placeholder="Username of hashtag">
+                        <i class="search link icon"></i>
+                    </div>
+                </form>
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}

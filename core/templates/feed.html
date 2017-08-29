@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block title %}Feed{% endblock %}
+
+{% block content %}
+    <div class="ui centered cards">
+        {% for item in feed %}
+            <div class="card">
+                <div class="image"><a href="/{{ route }}/{{ item.pk }}">{% if item.media_type == 2 %}<span class="ui right corner label"><i class="record icon"></i></span>{% endif %}<img src="{{ item.image_versions2.candidates[1].url }}"></a></div>
+                <div class="content">
+                    <img class="ui left floated mini circular image" src="{{ item.user.profile_pic_url }}">
+                    <div class="header">
+                        {{ item.user.username }}
+                    </div>
+                    <div class="meta">
+                        {{ item.taken_at|date }}
+                    </div>
+                    <div class="description">
+                        {{ item.caption.text|length > 30 ? item.caption.text|slice(0, 50) ~ '...' : item.caption.text }}
+                    </div>
+                    <div class="extra content">
+                        <span class="right floated">
+                            <i class="heart icon"></i>
+                            {{ item.like_count }}
+                        </span>
+                        <span>
+                            <i class="comments icon"></i>
+                            {{ item.comment_count }}
+                        </span>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

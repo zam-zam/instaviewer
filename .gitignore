@@ -1,0 +1,7 @@
+vendor/
+node_modules/
+
+*.sublime-project
+*.sublime-workspace
+
+settings.php

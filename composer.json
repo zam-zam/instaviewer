@@ -1,0 +1,7 @@
+{
+    "require": {
+        "mgp25/instagram-php": "^2.0",
+        "altorouter/altorouter": "1.1.0",
+        "twig/twig": "^2.0"
+    }
+}

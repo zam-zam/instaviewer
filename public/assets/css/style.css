@@ -1,0 +1,70 @@
+/*
+** Common styling
+*/
+header {
+    background-color: #AA5A39;
+}
+
+main {
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 2em;
+}
+
+.disclaimer {
+    font-size: .8em;
+    color: #EFEFEF;
+}
+
+/*
+** Elements
+*/
+header .ui.menu {
+    margin: 0;
+    background-color: #803515;
+}
+header .ui.menu a.item {
+    color: #FFC3AA;
+}
+header .ui.menu a.item:hover {
+    color: #fff;
+}
+
+.ui.intro.segment {
+    height: 600px;
+    background: url(/assets/img/intro-bg.jpg);
+    margin: 0;
+    padding-top: 160px;
+    text-align: center;
+}
+
+
+/*
+**  Feed items
+*/
+.ui.card>.image,
+.ui.cards>.card>.image {
+    background: none;
+}
+.ui.card a,
+.ui.cards>.card a {
+    display: block;
+    height: 100%;
+}
+.card .image img {
+    width: 100%;
+}
+.card div.image {
+    position: relative;
+    height: 320px;
+    overflow: hidden;
+}
+.card .image img {
+    position: absolute;
+    left: -1000%;
+    right: -1000%;
+    top: -1000%;
+    bottom: -1000%;
+    margin: auto;
+    min-width: 100%;
+}
