@@ -3,11 +3,16 @@
 {% block title %}Feed{% endblock %}
 
 {% block content %}
-    <div class="ui centered cards">
+    <div id="feed-container" class="ui centered cards">
         {% for item in feed %}
             <div class="card">
                 <div class="image"><a href="/{{ route }}/{{ item.pk }}">{% if item.media_type == 2 %}<span class="ui right corner label"><i class="record icon"></i></span>{% endif %}<img src="{{ item.image_versions2.candidates[1].url }}"></a></div>
                 <div class="content">
+                    {% if item.location %}
+                    <div class="ui right aligned">
+                    <a class="ui tiny brown label" style="display: inline-block;" href="/location/{{ item.location.pk }}"><i class="marker icon"></i>{{ item.location.name }}</a>
+                    </div>
+                    {% endif %}
                     <img class="ui left floated mini circular image" src="{{ item.user.profile_pic_url }}">
                     <div class="header">
                         {{ item.user.username }}
@@ -31,5 +36,11 @@
                 </div>
             </div>
         {% endfor %}
+    </div>
+    <div class="ui basic center aligned segment">
+        <button id="feed__load-more" class="ui basic button" data-nextmaxid="{{ next_max_id }}" data-url="{{ url }}">
+            <i class="refresh icon"></i>
+            Загрузить ещё
+        </button>
     </div>
 {% endblock %}
