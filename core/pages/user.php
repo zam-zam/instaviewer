@@ -1,17 +1,17 @@
 <?php
 $username = $match['params']['username'];
-$userId = $insta->getUsernameId($username);
+$userId = $insta->people->getUserIdForName($username);
 
 if (!empty($_GET) && isset($_GET['next_max_id'])) {
     $max_id = $_GET['next_max_id'];
-    $feed = $insta->getUserFeed($userId, $max_id);
+    $feed = $insta->timeline->getUserFeed($userId, $max_id);
     $next_max_id = $feed->next_max_id;
     $items = $feed->items;
     $route = $router->generate('media', array('mediaId' => 0));
     $template = $twig->load('feed_ajax.html');
     echo json_encode(array('data' => $template->render(array('feed' => $items, 'route' => explode('/', $route)[1])), 'next_max_id' => $next_max_id));
 } else {
-    $feed = $insta->getUserFeed($userId);
+    $feed = $insta->timeline->getUserFeed($userId);
     // var_dump($feed->items[0]->location);exit();
     $next_max_id = $feed->next_max_id;
     $items = $feed->items;

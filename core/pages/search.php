@@ -4,8 +4,8 @@ if ($_GET['q']) {
 }
 
 if (strlen($query) > 0) {
-    $users = $insta->searchUsers($query);
-    $tags = $insta->searchTags($query);
+    $users = $insta->people->search($query);
+    $tags = $insta->hashtag->search($query);
 }
 
 $template = $twig->load($match['name'].'.html');
